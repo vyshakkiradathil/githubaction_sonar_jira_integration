@@ -11,3 +11,4 @@ jobs:
           dotnet-version: "5.0.x"
       - run: |
           dotnet run
+      - uses: SonarSource/sonarqube-scan-action@v2.0.1
