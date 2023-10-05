@@ -7,11 +7,11 @@ public class Program
     ExecuteQuery("Jay");
     Console.WriteLine("Hello world, this is Jay");
   }
-  public void ExecuteQuery(string userInput)    
+  public static void ExecuteQuery(string userInput)    
   {         
     string query = "SELECT * FROM Users WHERE Username = '" + userInput + "'";         // Execute the query    
   }
-  public string DisplayMessage(string message)    
+  public static string DisplayMessage(string message)    
   {         
     return "<div>" + message + "</div>";     
   }
