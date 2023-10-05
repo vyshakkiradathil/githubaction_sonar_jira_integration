@@ -1,4 +1,4 @@
-name: ci
+name: Docker Image
 
 on:
   push:
@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/actiontoken:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/.NETSample:latest
