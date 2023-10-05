@@ -5,12 +5,5 @@ public class Program
   public static void Main()
   {
     Console.WriteLine("Hello world, this is Jay");
-    Console.WriteLine("Hello world, this is Jay");
-    Console.WriteLine("Hello world, this is Jay");
-    Console.WriteLine("Hello world, this is Jay");
-    if
-    {}
-    else
-    {}
   }
 }
