@@ -1,0 +1,39 @@
+name: Build and Publish Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        platforms: linux/amd64
+        push: true
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  run-app:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Run Docker container
+      uses: docker/metadata-action@v3
+      with:
+        images: ${{ secrets.DOCKER_USERNAME }}/helloworld-dotnet:latest
+
+    - name: Display Docker container logs
+      run: docker logs helloworld-dotnet
