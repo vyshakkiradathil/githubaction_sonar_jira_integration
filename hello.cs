@@ -6,8 +6,8 @@ public class Program
   {
     ExecuteQuery("Jay");
     Console.WriteLine("Hello world, this is Jay");
-    System.String username = "testuser"
-    System.String password = "testpass"
+    System.String username = "testuser";
+    System.String password = "testpass";
   }
   public static void ExecuteQuery(string userInput)    
   {         
