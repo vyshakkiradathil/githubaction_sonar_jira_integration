@@ -2,6 +2,7 @@ using System;
 
 public class Program
 {
+  private static string apiKey = "myApiKeyValue";
   public static void Main()
   {
     ExecuteQuery("Jay");
