@@ -11,8 +11,6 @@ public class Program
     System.String username = "testuser";
     System.String password = "testpass";
     CallApi(username, apiKey);
-    var myBinaryFormatter = new BinaryFormatter();
-    myBinaryFormatter.Deserialize(stream);
   }
   public static void ExecuteQuery(string userInput)    
   {         
