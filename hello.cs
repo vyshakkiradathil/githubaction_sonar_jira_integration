@@ -8,6 +8,7 @@ public class Program
     Console.WriteLine("Hello world, this is Jay");
     System.String username = "testuser";
     System.String password = "testpass";
+    CallApi(username, apiKey);
   }
   public static void ExecuteQuery(string userInput)    
   {         
@@ -17,4 +18,8 @@ public class Program
   {         
     return "<div>" + message + "</div>";     
   }
+  public static void CallApi(string username, string key)
+    {
+        Console.WriteLine($"Calling API for user {username} with key {key}");
+    }
 }
