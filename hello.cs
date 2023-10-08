@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 public class Program
 {
@@ -25,4 +26,13 @@ public class Program
     {
         Console.WriteLine($"Calling API for user {username} with key {key}");
     }
+  public static void Example()
+  {
+      var tempPath = Path.GetTempFileName();  // Noncompliant
+
+      using (var writer = new StreamWriter(tempPath))
+      {
+        writer.WriteLine("content");
+      }
+  }
 }
