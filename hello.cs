@@ -10,6 +10,8 @@ public class Program
     System.String username = "testuser";
     System.String password = "testpass";
     CallApi(username, apiKey);
+    var myBinaryFormatter = new BinaryFormatter();
+    myBinaryFormatter.Deserialize(stream);
   }
   public static void ExecuteQuery(string userInput)    
   {         
@@ -22,16 +24,5 @@ public class Program
   public static void CallApi(string username, string key)
     {
         Console.WriteLine($"Calling API for user {username} with key {key}");
-    }
-}
-
-public class ExampleController : Controller
-{
-    private static string TargetDirectory = "/path/to/target/directory/";
-
-    public void Example(string filename)
-    {
-        string path = Path.Combine(TargetDirectory, filename);
-        System.IO.File.Delete(path);
     }
 }
