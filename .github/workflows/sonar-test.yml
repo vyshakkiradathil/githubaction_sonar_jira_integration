@@ -1,5 +1,4 @@
-name:
-  Sonar Scan
+name:  Sonar Scan
 
 on:
   workflow_dispatch:
