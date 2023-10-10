@@ -1,3 +1,6 @@
+name:
+  Sonar Scan
+
 on:
   workflow_dispatch:
   pull_request:
