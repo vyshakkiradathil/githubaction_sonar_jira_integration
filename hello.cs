@@ -7,7 +7,7 @@ public class Program
   public static void Main()
   {
     ExecuteQuery("Jay");
-    Console.WriteLine("Hello world);
+    Console.WriteLine("Hello world");
     System.String username = "testuser";
     System.String password = "testpass";
     CallApi(username, apiKey);
