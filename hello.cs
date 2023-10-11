@@ -9,6 +9,7 @@ public class Program
     ExecuteQuery("Jay");
     Console.WriteLine("Hello world, this is the newer code");
     System.String username = "testuser";
+    System.String password = "testpass";
     CallApi(username, apiKey);
   }
   public static void ExecuteQuery(string userInput)    
