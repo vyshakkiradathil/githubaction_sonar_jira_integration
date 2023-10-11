@@ -46,8 +46,7 @@ jobs:
 
       - name: Upload SonarQube Quality Gate status
         uses: SonarSource/sonarcloud-github-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: jayseth
-          SONAR_ORGANIZATION: Github-Test-Org
-          SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          args: >
+            -Dsonar.organization=Github-Test-Org
+            -Dsonar.projectKey=jayseth
