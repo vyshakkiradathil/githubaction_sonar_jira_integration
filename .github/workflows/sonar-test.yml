@@ -49,12 +49,12 @@ jobs:
           sonarqube_url="https://sonarcloud.io/"
           organization_key="jayseth"
           project_key="Github-Test-Org"
-          sonarqube_token="${{ secrets.SONAR_TOKEN }}"
+          sonarqube_token="${{ secrets.SONARQUBE_TOKEN }}"
         
           report=$(curl -s -u "${sonarqube_token}:" "${sonarqube_url}/api/qualitygates/project_status?projectKey=${organization_key}:${project_key}")
         
-          status=$(echo "$report" | jq -r .projectStatus.status)
-        
+          status=$(echo "$report" | jq -r '.projectStatus.status')
+
           if [ "$status" != "OK" ]; then
             echo "SonarQube analysis failed. Vulnerabilities found."
             exit 1
