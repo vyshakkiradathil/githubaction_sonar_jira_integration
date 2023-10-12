@@ -10,7 +10,7 @@ on:
 
 jobs:
   validate-changes:
-    runs-on: windows-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2.2.0
         with:
