@@ -64,8 +64,8 @@ jobs:
                                       "project": {
                                         "key": "KAN"
                                       },
-                                      "summary": "SonarQube analysis failed! STATUS: '"$status"'"
-                                      "description": "'"$report"'",
+                                      "summary": "SonarQube analysis failed!"
+                                      "description": "SonarQube analysis failed!",
                                       "issuetype": {
                                         "name": "Bug"
                                       }
