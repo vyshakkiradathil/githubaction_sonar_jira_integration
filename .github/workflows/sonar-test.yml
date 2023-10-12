@@ -52,6 +52,55 @@ jobs:
 
           if [ "$status" == "ERROR" ]; then
             echo "SonarQube analysis failed. Vulnerabilities found."
+
+            JIRA_URL="https://mysitetest16235.atlassian.net/"
+
+            USERNAME=${{ secrets.JIRA_USERNAME }}
+            API_TOKEN=${{ secrets.JIRA_TOKEN }}
+
+            # Base64-encoded credentials
+            CREDENTIALS=$(echo -n "$USERNAME:$API_TOKEN" | base64)
+
+            # Login to Jira and obtain the session token
+            LOGIN_RESPONSE=$(curl -s -X POST \
+              -H "Authorization: Basic $CREDENTIALS" \
+              -H "Content-Type: application/json" \
+              --url "$JIRA_URL/rest/auth/1/session" \
+              --data '{
+                "username": "'$USERNAME'",
+                "password": "'$API_TOKEN'"
+              }'
+            )
+
+            # Extract the session token (JSESSIONID) from the login response
+            SESSION_TOKEN=$(echo "$LOGIN_RESPONSE" | jq -r .session.value)
+
+            echo "Logged in to Jira with session token: $SESSION_TOKEN"
+
+            # Create a new issue in Jira
+            ISSUE_CREATE_RESPONSE=$(curl -s -X POST \
+              -H "Authorization: Bearer $SESSION_TOKEN" \
+              -H "Content-Type: application/json" \
+              --url "$JIRA_URL/rest/api/2/issue" \
+              --data '{
+                "fields": {
+                  "project": {
+                    "key": "KAN"
+                  },
+                  "summary": "New Issue Summary",
+                  "description": "Issue Description",
+                  "issuetype": {
+                    "name": "Task"
+                  }
+                }
+              }'
+            )
+
+            # Extract the issue key from the response
+            ISSUE_KEY=$(echo "$ISSUE_CREATE_RESPONSE" | jq -r .key)
+
+            echo "Created a new issue in Jira with key: $ISSUE_KEY"
+
             exit 1
           else
             echo "SonarQube analysis passed. No vulnerabilities found."
