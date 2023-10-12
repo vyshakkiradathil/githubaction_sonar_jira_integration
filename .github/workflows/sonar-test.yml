@@ -52,37 +52,27 @@ jobs:
 
           if [ "$status" == "ERROR" ]; then
             echo "SonarQube analysis failed. Vulnerabilities found."
-            echo "Logging In to JIRA..."
+            echo "Creating JIRA Issue..."
+            
             JIRA_URL="https://mysitetest16235.atlassian.net/"
-
             USERNAME=${{ secrets.JIRA_USERNAME }}
             API_TOKEN=${{ secrets.JIRA_TOKEN }}
 
-            # Login to Jira and obtain the session token
-            LOGIN_RESPONSE=$(curl -s -u "$USERNAME:$API_TOKEN" -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/auth/1/session")
-
-            # Extract the session token (JSESSIONID) from the login response
-            SESSION_TOKEN=$(echo "$LOGIN_RESPONSE" | jq -r .session.value)
-
-            echo "Logged in to Jira with session token: $SESSION_TOKEN"
-
             # Create a new issue in Jira
-            ISSUE_CREATE_RESPONSE=$(curl -s -X POST \
-              -H "Authorization: Bearer $SESSION_TOKEN" \
-              -H "Content-Type: application/json" \
-              --url "$JIRA_URL/rest/api/2/issue" \
-              --data '{
-                "fields": {
-                  "project": {
-                    "key": "KAN"
-                  },
-                  "summary": "New Issue Summary",
-                  "description": "Issue Description",
-                  "issuetype": {
-                    "name": "Task"
-                  }
-                }
-              }'
+            ISSUE_CREATE_RESPONSE=$(curl -D- -u "$USERNAME:$API_TOKEN" -X POST --data '{
+                                              "fields": {
+                                                "project": {
+                                                  "key": "KAN"
+                                                },
+                                                "summary": "New Issue Summary",
+                                                "description": "Issue Description",
+                                                "issuetype": {
+                                                  "name": "Task"
+                                                }
+                                              }
+                                            }' \
+                                 -H "Content-Type: application/json" \
+                                 --url "$JIRA_URL/rest/api/2/issue" 
             )
 
             # Extract the issue key from the response
