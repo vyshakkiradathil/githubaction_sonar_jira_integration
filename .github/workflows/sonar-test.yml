@@ -64,13 +64,13 @@ jobs:
                                       "project": {
                                         "key": "KAN"
                                       },
-                                      "summary": "SonarQube analysis failed! STATUS: "$status"",
-                                      "description": $result,
+                                      "summary": "SonarQube analysis failed! STATUS: '"$status"'"
+                                      "description": "'"$report"'",
                                       "issuetype": {
                                         "name": "Task"
                                       }
                                     }
-                                  }' -H "Content-Type: application/json" --url "$JIRA_URL/rest/api/2/issue")
+                                  }' -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/api/2/issue")
 
             echo "Created a new issue in Jira!!"
             
