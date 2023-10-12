@@ -72,6 +72,9 @@ jobs:
                                     }
                                   }' -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/api/2/issue")
 
+            ISSUE_KEY=$(echo "$ISSUE_CREATE_RESPONSE" | jq -r .key)
+            echo "Created a new issue in Jira with key: $ISSUE_KEY"
+            
             exit 1
           else
             echo "SonarQube analysis passed. No vulnerabilities found."
