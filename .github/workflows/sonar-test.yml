@@ -64,16 +64,15 @@ jobs:
                                       "project": {
                                         "key": "KAN"
                                       },
-                                      "summary": "SonarQube analysis failed! STATUS:$status",
-                                      "description": "$result",
+                                      "summary": "SonarQube analysis failed! STATUS: "$status"",
+                                      "description": $result,
                                       "issuetype": {
                                         "name": "Task"
                                       }
                                     }
                                   }' -H "Content-Type: application/json" --url "$JIRA_URL/rest/api/2/issue")
 
-            ISSUE_KEY=$(echo "$ISSUE_CREATE_RESPONSE" | jq -r '.key')
-            echo "Created a new issue in Jira with key: '$ISSUE_KEY'"
+            echo "Created a new issue in Jira!!"
             
             exit 1
           else
