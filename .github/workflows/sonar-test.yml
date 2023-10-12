@@ -53,7 +53,10 @@ jobs:
           status=$(echo "$report" | jq -r '.projectStatus.status')
           result=$(echo "$report" | jq -r '.projectStatus.conditions[] | select(.status != "OK") | .metricKey + ": " + .actualValue + " / " + .errorThreshold + " (" + .status + ")"' | paste -sd, -)
           
+
+          echo "start result \n"
           echo "$result"
+          echo "end result \n"
 
           if [ "$status" != "OK" ]; then
             echo "SonarQube analysis failed! Vulnerabilities found."
