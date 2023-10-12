@@ -50,7 +50,7 @@ jobs:
         
           status=$(echo "$report" | jq -r '.projectStatus.status')
 
-          if [ "$status" == "ERROR" ]; then
+          if [ "$status" != "OK" ]; then
             echo "SonarQube analysis failed. Vulnerabilities found."
             echo "Creating JIRA Issue..."
             
@@ -64,8 +64,8 @@ jobs:
                                                 "project": {
                                                   "key": "KAN"
                                                 },
-                                                "summary": "New Issue Summary",
-                                                "description": "Issue Description",
+                                                "summary": "SonarQube analysis failed! STATUS: "$status"",
+                                                "description": "$report",
                                                 "issuetype": {
                                                   "name": "Task"
                                                 }
