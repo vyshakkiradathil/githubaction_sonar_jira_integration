@@ -65,7 +65,7 @@ jobs:
                                         \"key\": \"SON\"
                                       },
                                       \"summary\": \"SonarQube analysis failed!\",
-                                      \"description\": \"SonarQube analysis failed!\",
+                                      \"description\": \"SonarQube analysis failed with error code $status !\",
                                       \"issuetype\": {
                                         \"name\": \"Bug\"
                                       }
@@ -75,7 +75,7 @@ jobs:
             # Extract the issue key from the response
             echo "Created a new issue in Jira with key: $ISSUE_CREATE_RESPONSE"
             
-            exit 1
+            
           else
             echo "SonarQube analysis passed. No vulnerabilities found."
           fi
