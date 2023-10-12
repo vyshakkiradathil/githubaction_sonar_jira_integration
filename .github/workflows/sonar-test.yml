@@ -64,14 +64,14 @@ jobs:
                                                 "project": {
                                                   "key": "KAN"
                                                 },
-                                                "summary": "SonarQube analysis failed! STATUS:here",
-                                                "description": "report",
+                                                "summary": "SonarQube analysis failed! STATUS:$status",
+                                                "description": "$report",
                                                 "issuetype": {
-                                                  "name": "Task"
+                                                  "name": "Bug"
                                                 }
                                               }
                                             }' \
-                                 -H "Content-Type: application/json" --url "$JIRA_URL/rest/api/2/issue")
+                                 -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/api/2/issue")
 
             # Extract the issue key from the response
             ISSUE_KEY=$(echo "$ISSUE_CREATE_RESPONSE" | jq -r .key)
