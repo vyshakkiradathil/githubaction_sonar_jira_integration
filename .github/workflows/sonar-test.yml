@@ -51,7 +51,8 @@ jobs:
           report=$(curl --location 'https://sonarcloud.io/api/qualitygates/project_status?projectKey=Github-Test-Org' \--header 'Authorization: Bearer ${{ secrets.SONAR_TOKEN }}')
           
           status=$(echo "$report" | jq -r '.projectStatus.status')
-          result=$(echo "$report" | jq -r '.projectStatus.conditions[] | select(.status != "OK") | .metricKey + ": " + .actualValue + " (" + .errorThreshold + ")"')
+          result=$(echo "$report" | jq -r '.projectStatus.conditions[] | select(.status != "OK") | .metricKey + ": " + .actualValue + " / " + .errorThreshold + " (" + .status + ")"' | paste -sd, -)
+          
           echo "$result"
 
           if [ "$status" != "OK" ]; then
