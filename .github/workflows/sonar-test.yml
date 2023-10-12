@@ -52,7 +52,7 @@ jobs:
           
           echo "$report"
           status=$(echo "$report" | jq -r '.projectStatus.status')
-          result=$(echo "$report" | jq -r '.projectStatus')
+          result=$(echo "$report" | jq -r '.projectStatus.conditions[] | select(.status != "OK") | .metricKey + ": " + .actualValue + " (" + .errorThreshold + ")"')
           echo "$result"
 
           if [ "$status" != "OK" ]; then
