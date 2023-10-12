@@ -58,7 +58,7 @@ jobs:
             USERNAME=${{ secrets.JIRA_USERNAME }}
             API_TOKEN=${{ secrets.JIRA_TOKEN }}
 
-            DESCRIPTION="SonarQube analysis failed! Error: $status Result: $report"
+            Description="SonarQube analysis failed! Error: $status Result: $report"
             # Create a new issue in Jira
             ISSUE_CREATE_RESPONSE=$(curl -D- -u "$USERNAME:$API_TOKEN" -X POST --data '{
                             "fields": {
@@ -67,7 +67,7 @@ jobs:
                                 "key": "SON"
                             },
                             "summary": "SonarQube analysis failed!",
-                            "description": "SonarQube analysis failed!",
+                            "description": "'"$Description"'",
                             "issuetype": {
                                 "name": "Bug"
                             }
