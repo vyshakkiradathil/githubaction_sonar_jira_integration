@@ -64,10 +64,10 @@ jobs:
                                       "project": {
                                         "key": "KAN"
                                       },
-                                      "summary": "SonarQube analysis failed! STATUS:'"$status"'",
-                                      "description": "'"$report"'",
+                                      "summary": "SonarQube analysis failed! STATUS",
+                                      "description": "result",
                                       "issuetype": {
-                                        "name": "Bug"
+                                        "name": "Task"
                                       }
                                     }
                                   }' -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/api/2/issue")
