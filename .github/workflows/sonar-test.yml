@@ -52,7 +52,7 @@ jobs:
 
           if [ "$status" == "ERROR" ]; then
             echo "SonarQube analysis failed. Vulnerabilities found."
-
+            echo "Logging in to JIRA."
             JIRA_URL="https://mysitetest16235.atlassian.net/"
 
             USERNAME=${{ secrets.JIRA_USERNAME }}
