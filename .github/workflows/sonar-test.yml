@@ -49,8 +49,11 @@ jobs:
       - name: Check for SonarQube Issues
         run: |
           report=$(curl --location 'https://sonarcloud.io/api/qualitygates/project_status?projectKey=Github-Test-Org' \--header 'Authorization: Bearer ${{ secrets.SONAR_TOKEN }}')
-        
+          
+          echo "$report"
           status=$(echo "$report" | jq -r '.projectStatus.status')
+          result=$(echo "$report" | jq -r '.projectStatus')
+          echo "$result"
 
           if [ "$status" != "OK" ]; then
             echo "SonarQube analysis failed! Vulnerabilities found."
@@ -67,7 +70,7 @@ jobs:
                                         \"key\": \"SON\"
                                       },
                                       \"summary\": \"SonarQube analysis failed with error code $status!\",
-                                      \"description\": \"$report\",
+                                      \"description\": \"$result\",
                                       \"issuetype\": {
                                         \"name\": \"Bug\"
                                       }
