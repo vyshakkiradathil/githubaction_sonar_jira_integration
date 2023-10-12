@@ -51,7 +51,7 @@ jobs:
           project_key="Github-Test-Org"
           sonarqube_token="${{ secrets.SONAR_TOKEN }}"
         
-          report=$(curl -s -u "${sonarqube_token}:" "${sonarqube_url}/api/qualitygates/project_status?projectKey=${organization_key}:${project_key}")
+          report=$(curl --location 'https://sonarcloud.io/api/qualitygates/project_status?projectKey=Github-Test-Org' \--header 'Authorization: Bearer ed024810a43cc032ce05b18e09362851ebef6257')
         
           status=$(echo "$report" | jq -r '.projectStatus.status')
 
