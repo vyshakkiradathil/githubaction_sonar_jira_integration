@@ -52,27 +52,25 @@ jobs:
 
           if [ "$status" != "OK" ]; then
             echo "SonarQube analysis failed. Vulnerabilities found."
+            
             echo "Creating JIRA Issue..."
             
             JIRA_URL="https://mysitetest16235.atlassian.net/"
             USERNAME=${{ secrets.JIRA_USERNAME }}
             API_TOKEN=${{ secrets.JIRA_TOKEN }}
 
-            Description="SonarQube analysis failed with Status: '"$status"' "Result:" '"$report"' "
-            # Create a new issue in Jira
-            ISSUE_CREATE_RESPONSE=$(curl -D- -u "$USERNAME:$API_TOKEN" -X POST --data '{
-                            "fields": {
-                            "project":
-                            {
-                                "key": "SON"
-                            },
-                            "summary": "SonarQube analysis failed!",
-                            "description": "'"$Description"'",
-                            "issuetype": {
-                                "name": "Bug"
-                            }
-                        }
-                        }' -H "Content-Type: application/json" --url "$JIRA_URL/rest/api/2/issue")
+            ISSUE_CREATE_RESPONSE=$(curl -D- -u "$USERNAME:$API_TOKEN" -X POST --data "{
+                                    \"fields\": {
+                                      \"project\": {
+                                        \"key\": \"SON\"
+                                      },
+                                      \"summary\": \"SonarQube analysis failed!\",
+                                      \"description\": \"SonarQube analysis failed with Status: $status Result: $report\",
+                                      \"issuetype\": {
+                                        \"name\": \"Bug\"
+                                      }
+                                    }
+                                  }" -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/api/2/issue")
 
             # Extract the issue key from the response
             echo "Created a new issue in Jira with key: $ISSUE_CREATE_RESPONSE"
