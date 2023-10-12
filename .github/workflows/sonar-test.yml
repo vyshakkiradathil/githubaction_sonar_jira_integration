@@ -75,7 +75,8 @@ jobs:
                                   }" -H "Content-Type: application/json" -v --url "$JIRA_URL/rest/api/2/issue")
 
             # Extract the issue key from the response
-            echo "Created a new issue in Jira with key: $ISSUE_CREATE_RESPONSE"
+            key=$(echo "$ISSUE_CREATE_RESPONSE" | jq -r '.key')
+            echo "Created a new issue in Jira with key: $key"
             
             
           else
